@@ -19,23 +19,71 @@ window.onload = function() {
     // equivalent set of six event listeners for your solutions. the first one is done for you.
 
     document.getElementById("hello").onclick = sayHello;
+    document.getElementById("rectangle").onclick = drawRectangle;
 }
 
 /*
  * Exercise 1.
  */
 
-const sayHello = function() {
-    // write your exercise 1 code here
-};
+ const sayHello = function() {
+   let message = prompt("Message:");
+   while (message.length >= 50){
+     alert("Your message is too long. Please keep your message under 50 characters.");
+     message = prompt("Message:")
+   }
+     let canvas = document.getElementById('student-canvas-1');
+     let ctx = canvas.getContext('2d');
+     ctx.font = '48px sans-serif';
+     ctx.clearRect(0, 0, canvas.width, canvas.height);
+     ctx.strokeText(message, 30, 70, 994);
+ };
 
 /*
  * Exercise 2.
  */
 
 const drawRectangle = function() {
-    // write your exercise 2 code here
-};
+    const canvas = document.getElementById('student-canvas-2');
+    const ctx = canvas.getContext('2d');
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+   do {
+     var width = prompt("Width: ")
+     if (width == null) {
+       break;
+     }
+     var height = prompt("Height: ")
+     if (height == null) {
+       break;
+     }
+     var x = prompt("X: ")
+     if (x == null) {
+       break;
+    }
+     var y = prompt("Y: ")
+     if (y == null) {
+       break;
+    }
+     if (width > canvas.width || width < 1) {
+       alert("Your width must be between 1 and 1024.")
+     }
+     if (height > canvas.height || height < 1) {
+       alert("Your height must be between 1 and 512.")
+     }
+     if (x < 1 || x > 1024) {
+       alert("Your x-coordinate must be between 1 and 1024.")
+     }
+     if (y < 1 || y > 512) {
+       alert("Your y-coordinate must be between 1 and 512.")
+     }
+     if (isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y)) {
+       alert("One of your values is not a number.")
+     }
+   } while (width > canvas.width || width < 1 || height > canvas.height || height < 1 || x < 1 || x > 1024 || y < 1 || y > 512 || isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y))
+
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+   ctx.strokeRect(x, y, width, height);
+ };
 
 /*
  * Exercise 3.
