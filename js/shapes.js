@@ -226,47 +226,104 @@ const drawRectangle = function() {
  */
 
  const drawPyramid = function() {
- const canvas = document.getElementById("student-canvas-6");
-   const ctx = canvas.getContext("2d");
-   ctx.clearRect(0, 0, canvas.width, canvas.height);
-   var distance = 0;
-   var height = 0;
-   var adjustDistance = 0;
-   var adjustHeight = 0;
-   var check = 5;
-   var side;
+     let ctx = document.getElementById('student-canvas-6');
+     let context = ctx.getContext('2d');
+     context.clearRect(0, 0, ctx.width, ctx.height);
+     let side = prompt("Side:");
+     let flag = 0;
 
-   do {
-       var side = prompt("Side: ")
-       if (side == null) {
-         break;
-       }
-       if (side < 1) {
-        alert("Your block size must be at least 1.")
-       }
-       else if (side > 100) {
-        alert("Your pyramid will fit on the canvas")
-       }
-       else if (isNaN(side)) {
-        alert("Your block size is not a number.")
-       }
-     } while (isNaN(side) || side > 100 || side < 1)
-     distance = Number(distance);
-     height = Number(height);
-     side = Number(side);
-     for (x = 5; x > 0; x--) {
-     check = x
-     while(check >= 1) {
-      ctx.beginPath();
-      ctx.rect(10 + distance, (502 - side) - height, side,  side);
-      ctx.stroke();
-      ctx.closePath();
-      distance = distance + side
-      check--
+
+     if (side === null) {
+         flag = 1;
+         context.clearRect(0, 0, ctx.width, ctx.height);
      }
-      adjustingDistance++
-      distance = adjustingDistance * (1/2 * side)
-      adjustingHeight++
-      height = adjustingHeight * side
+     else {
+         side = Number(side);
      }
+     while (Number.isNaN(side) && flag !== 1) {
+         alert("The side is not a number.");
+         side = prompt("Side: ");
+
+         flag = 0;
+         if (side === null) {
+             flag = 1;
+             context.clearRect(0, 0, ctx.width, ctx.height);
+         }
+         else {
+             side = Number(side);
+         }
+     }
+     while (side * 5 > ctx.height) {
+         alert("Your pyramid won't fit on the canvas.");
+         side = prompt("Side: ");
+
+         flag = 0;
+         if (side === null) {
+             flag = 1;
+             context.clearRect(0, 0, ctx.width, ctx.height);
+
+         }
+         else {
+             side = Number(side);
+         }
+         while (Number.isNaN(side) && flag !== 1) {
+             alert("The side is not a number.");
+             side = prompt("Side: ");
+         }
+
+     }
+     while (side < 1 && flag !== 1) {
+         alert("Your block size must be at least 1.");
+         side = prompt("Side: ");
+         flag = 0;
+
+         if (side === null) {
+             flag = 1;
+             context.clearRect(0, 0, ctx.width, ctx.height);
+
+         }
+         else {
+             side = Number(side);
+             flag = 0;
+         }
+         while (Number.isNaN(side) && flag !== 1) {
+             alert("The side is not a number.");
+             side = prompt("Side: ");
+         }
+         while (side * 5 > ctx.height) {
+             alert("Your pyramid won't fit on the canvas.");
+             side = prompt("Side: ");
+
+         }
+
+     }
+
+
+     if (flag !== 1 && side * 5 <= ctx.height) {
+         context.strokeRect(ctx.width - (ctx.width - 10), (ctx.height - 10) - side, side, side);
+         for (let i = 1; i < 5; i++) {
+             context.strokeRect(ctx.width - (ctx.width - 10) + (side * i), (ctx.height - 10) - side, side, side);
+         }
+
+         context.strokeRect((ctx.width - (ctx.width - 10)) + (side * 0.5), (ctx.height - 10) - (side * 2) , side, side);
+         context.strokeRect((ctx.width - (ctx.width - 10)) + (side * 1.5), (ctx.height - 10) - (side * 2) , side, side);
+         context.strokeRect(((ctx.width - (ctx.width - 10)) + (side * 1.5 * 2)) - (side * 0.5) , (ctx.height - 10) - (side * 2) , side, side);
+         context.strokeRect(((ctx.width - (ctx.width - 10)) + (side * 1.5 * 3)) - (side) , (ctx.height - 10) - (side * 2) , side, side);
+
+         context.strokeRect((ctx.width - (ctx.width - 10)) + (side * 0.5) + (side * 0.5), (ctx.height - 10) - (side * 3) , side, side);
+         context.strokeRect((ctx.width - (ctx.width - 10)) + (side * 0.5) + (side * 1.5), (ctx.height - 10) - (side * 3) , side, side);
+         context.strokeRect((ctx.width - (ctx.width - 10)) + (side * 0.5) + (side * 2.5), (ctx.height - 10) - (side * 3) , side, side);
+
+         context.strokeRect((ctx.width - (ctx.width - 10)) + (side * 0.5) + side, (ctx.height - 10) - (side * 4) , side, side);
+         context.strokeRect((ctx.width - (ctx.width - 10)) + (side * 0.5) + (side * 2), (ctx.height - 10) - (side * 4) , side, side);
+
+         context.strokeRect((ctx.width - (ctx.width - 10)) + (side * 0.5) + (side * 1.5), (ctx.height - 10) - (side * 5) , side, side);
+     }
+
+
+
+
+
+
+
  };
